@@ -1,0 +1,57 @@
+/* A binary tree node
+
+struct Node
+{
+    int data;
+    struct Node* left;
+    struct Node* right;
+    
+    Node(int x){
+        data = x;
+        left = right = NULL;
+    }
+};
+ */
+
+void left_side(Node* root, int level, vector<int>&v)
+{
+    if(root==NULL)
+    return;
+    if(level == v.size())
+    {
+        v.push_back(root->data);
+    }
+    left_side(root->left, level+1, v);
+    left_side(root->right, level+1, v);
+}
+//Function to return a list containing elements of left view of the binary tree.
+
+vector<int> leftView(Node *root)
+{
+   vector<int>ans;
+   left_side(root,0,ans);
+   return ans;
+}
+
+-----------------------------------------------------------------------------------------------------------------------------
+
+//Explanation of the above code
+
+Intuition:-
+
+In case of Right side view, apply recursive level order traversal and traverse the nodes as (ROOT->LEFT->RIGHT).
+
+Approach:-
+
+1. Use a vector to store the nodes visible in left side view. // vector<int>ans
+2. If the size of the vector is equal to the level, then push the node into the vector, otherwise do not push it. //if(level == ans.size()) ans.push_back(root->data);
+3. recursively check for other nodes. // left_side(root->left, level+1, ans); left_side(root->right, level+1, ans);
+
+Complexity:-
+
+Time complexity:
+O(N), where N = no. of the nodes, as each node is visited only once.
+
+Space complexity:
+O(N), where N = no. of the nodes.
+It represents the maximum height of the binary tree, in the case of skewed tree, maximum height = N.
