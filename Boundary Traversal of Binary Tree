@@ -1,0 +1,53 @@
+class Solution {
+public:
+    bool isLeaf(Node*root)
+    {
+        return(!root->left) && (!root->right);
+    }
+    void add_left(Node*curr,vector<int>&v)
+    {
+        while(curr)
+        {
+            if(!isLeaf(curr)) v.push_back(curr->data);
+            if(curr->left) curr = curr->left;
+            else curr = curr->right;
+        }
+    }
+    void add_right(Node* curr, vector<int>&v)
+    {
+        stack<int>s;
+        while(curr)
+        {
+            if(!isLeaf(curr)) s.push(curr->data);
+            if(curr->right) curr=curr->right;
+            else curr = curr->left;
+        }
+        while(!s.empty())
+        {
+            auto it = s.top();
+            s.pop();
+            v.push_back(it);
+        }
+    }
+    void add_leaf(Node* curr,vector<int>&v)
+    {
+        if(curr==NULL) return;
+        if(isLeaf(curr)) v.push_back(curr->data);
+        add_leaf(curr->left,v);
+        add_leaf(curr->right,v);
+    }
+    vector <int> boundary(Node *root)
+    {
+        vector<int>ans;
+        if(root==NULL)
+        return ans;
+        if(!isLeaf(root)) ans.push_back(root->data);
+        add_left(root->left,ans);
+        add_leaf(root,ans);
+        add_right(root->right,ans);
+        return ans;
+    }
+};
+
+Time complexity = O(N), where N = no. of Nodes
+Space Complexity = O(N), where N = no. of Nodes,
