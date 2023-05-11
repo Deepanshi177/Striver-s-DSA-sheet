@@ -1,0 +1,21 @@
+class Solution {
+public:
+    int Path_sum(TreeNode* node, int& maxi)
+    {
+        if(node==NULL)
+        return 0;
+        int x = max(0,Path_sum(node->left,maxi));
+        int y = max(0,Path_sum(node->right,maxi));
+        int val = node->val;
+        maxi = max(maxi, val+ x + y);
+        return val + max(x,y);
+    }
+    int maxPathSum(TreeNode* root) {
+        int maxi = INT_MIN;
+        Path_sum(root,maxi);
+        return maxi;
+    }
+};
+----------------------------------------------------------------------------------------------------
+Time Complexity = O(N) , where N = no. of nodes
+Space Complexity = O(N). where N = no. of nodes
