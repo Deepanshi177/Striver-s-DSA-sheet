@@ -1,0 +1,53 @@
+// Iterative Approach--> Level Order Traversal
+
+class Solution {
+public:
+    int maxDepth(TreeNode* root) {
+        int level = 0;
+        if(root==NULL)
+        return level;
+        queue<TreeNode*>q;
+        q.push(root);
+        while(!q.empty())
+        {
+            int size = q.size();
+            for(int i=0;i<size;i++)
+            {
+              TreeNode* node = q.front();
+              q.pop();
+              if(node->left) q.push(node->left);
+              if(node->right) q.push(node->right);
+            }
+            level++;
+        }
+        return level;
+    }
+};
+
+Time Complexity = O(N), where N = no. of the nodes in the Binary Tree.
+Space Complexity = O(N), where N = no. of the nodes in the Binary Tree.
+
+---------------------------------------------------------------------------------------------------------------------------
+
+//Recursive Approach --> Level Order Traversal
+
+class Solution{
+    public:
+    //Function to find the height of a binary tree.
+    int postOrder(Node* node)
+    {
+        if(node==NULL)
+        return 0;
+        int x= postOrder(node->left);
+        int y= postOrder(node->right);
+        return 1+ max(x,y);
+        
+    }
+    int height(struct Node* node){
+        int x = postOrder(node);
+        return x;
+    }
+};
+
+Time Complexity = O(N)
+Space Complexity = O(1)(Extra Space) + O(H) where H= Height of the Binary tree
