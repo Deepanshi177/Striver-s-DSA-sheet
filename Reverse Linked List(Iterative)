@@ -1,0 +1,22 @@
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+        if(head==NULL)return NULL;
+        ListNode* prev = NULL;
+        ListNode* curr = head;
+        ListNode* fwd = head->next;
+        while(fwd!=NULL)
+        {
+            curr->next = prev;
+            prev = curr;
+            curr = fwd;
+            fwd = fwd->next;
+        }
+        curr->next = prev;
+        return curr;
+    }
+};
+
+-----------------------------------------------------------------------------------------------------------
+Time Complexity = O(N) , Where N = no. of Nodes.
+Space Complexity = O(1)
