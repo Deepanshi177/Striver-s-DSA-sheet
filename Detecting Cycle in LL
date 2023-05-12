@@ -1,0 +1,49 @@
+//HASHMAP
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+        if(head==NULL)return NULL;
+        ListNode* prev = NULL;
+        ListNode* curr = head;
+        ListNode* fwd = head->next;
+        while(fwd!=NULL)
+        {
+            curr->next = prev;
+            prev = curr;
+            curr = fwd;
+            fwd = fwd->next;
+        }
+        curr->next = prev;
+        return curr;
+    }
+};
+
+Time complexity = O(N), where N = no. of the nodes in the Linked List
+Time complexity = O(N), where N = no. of the nodes in the Linked List
+
+-------------------------------------------------------------------------------------------------------------
+
+//SLOW AND FAST POINTER
+
+class Solution
+{
+    public:
+    //Function to check if the linked list has a loop.
+    bool detectLoop(Node* head)
+    {
+        Node* slow = head;
+        Node* fast = head;
+        while(fast && fast->next)
+        {
+            fast = fast->next->next;
+            slow = slow->next;
+            if(slow==fast)
+            return true;
+        }
+        return false;
+    }
+};
+
+Time Complexity = O(N), where N = no. of the nodes.
+Space Complexity = O(1)
+
